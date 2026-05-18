@@ -35,7 +35,7 @@ export default function Home() {
 
           <div className="transition-transform duration-300 hover:-translate-y-3">
             <Link
-              href={"http://localhost:3000/signin"}
+              href={"/signup"}
               style={{ backgroundColor: Theme.warmYellow }}
               className="text-2xl px-20 py-3 rounded-full text-black font-semibold max-md:px-15"
             >
