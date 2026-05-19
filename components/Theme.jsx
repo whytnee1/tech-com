@@ -4,4 +4,5 @@ export const Theme = {
     SoftPaleCream: "#FFFDE7",
     warmYellow: "#FFD700",
     pastalYellow: "#FFFACD",
+    warmWhite: "#FFFFFA"
 }

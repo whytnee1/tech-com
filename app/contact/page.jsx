@@ -18,7 +18,7 @@ const ContactPage = () => {
     {
       id: 1,
       title: "Email Us",
-      value: "hello@techcommunity.com",
+      value: "Techcom@gmail.com",
       subtext: "We respond within 24 hours."
     },
     {

@@ -101,7 +101,7 @@ const ProfilePage = () => {
     <main className="min-h-screen bg-slate-50 py-20 px-6">
       <div className="max-w-xl mx-auto">
         
-        <section className="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
+        <section className="bg-[#FFFFFA] rounded-[2.5rem] shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
           
           <div className="h-32 w-full" style={{ backgroundColor: isDeveloper ? "#1e293b" : Theme.LightPurple }}></div>
 
@@ -172,17 +172,17 @@ const ProfilePage = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className={`p-4 rounded-2xl ${isDeveloper ? 'bg-slate-900 text-white' : 'bg-slate-50'}`}>
                   <p className={`text-[10px] font-bold uppercase ${isDeveloper ? 'text-slate-400' : 'text-slate-400'}`}>Role</p>
-                  <p className="font-black">{isDeveloper ? "Developer" : "Member"}</p>
+                  <p className="font-black hover:text-purple-600">{isDeveloper ? "Developer" : "Member"}</p>
                 </div>
                 <div className="p-4 bg-slate-50 rounded-2xl">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase">Status</p>
-                  <p className="text-slate-800 font-black">Verified</p>
+                  <p className="text-[10px] font-bold text-slate-500 uppercase">Status</p>
+                  <p className="text-slate-800 font-black hover:text-green-700">Verified</p>
                 </div>
               </div>
 
               <button
                 onClick={handleLogout}
-                className="w-full py-4 rounded-2xl border-2 border-slate-100 text-slate-400 font-bold flex items-center justify-center gap-3 hover:bg-red-50 hover:border-red-100 hover:text-red-500 transition-all mt-6"
+                className="w-full py-4 rounded-2xl border-2 border-slate-400  text-slate-900 font-bold flex items-center justify-center gap-3 hover:bg-red-70 hover:border-red-300 hover:text-red-500 transition-all mt-6"
               >
                 <FaSignOutAlt /> Sign Out
               </button>

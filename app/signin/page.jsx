@@ -1,19 +1,34 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Theme } from "@/components/Theme";
 import Link from "next/link";
-import { signIn } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
-import { auth } from '@/config/firebase'; // Ensure this is correctly exported
+import { auth } from '@/config/firebase'; 
 import { sendPasswordResetEmail } from "firebase/auth";
 
 const SignInPage = () => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState("");
   const [resetSent, setResetSent] = useState(false);
+
+  // Clear stale local sessions on mount if it exceeds 24 hours
+  useEffect(() => {
+    const lastLogin = localStorage.getItem("last_login_timestamp");
+    if (lastLogin) {
+      const twentyFourHours = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+      const timeElapsed = Date.now() - parseInt(lastLogin, 10);
+
+      if (timeElapsed > twentyFourHours) {
+        localStorage.removeItem("last_login_timestamp");
+        signOut({ redirect: false }); // Force NextAuth to clean up client context
+        setErrorMsg("Your session expired after 24 hours. Please sign in again.");
+      }
+    }
+  }, []);
 
   // Validation Schema with Yup
   const validationSchema = Yup.object({
@@ -62,6 +77,8 @@ const SignInPage = () => {
           setErrorMsg("Invalid credentials. Please check your email and password.");
           console.error("Login failed:", res.error);
         } else {
+          // Set timestamp for 24-hour expiry evaluation
+          localStorage.setItem("last_login_timestamp", Date.now().toString());
           router.push('/tip');
         }
       } catch (error) {
@@ -104,7 +121,10 @@ const SignInPage = () => {
           {/* Google Sign In */}
           <button 
             type="button"
-            onClick={() => signIn("google", { callbackUrl: "/tip" })}
+            onClick={async () => {
+              localStorage.setItem("last_login_timestamp", Date.now().toString());
+              await signIn("google", { callbackUrl: "/tip" });
+            }}
             className="w-full flex items-center justify-center gap-3 bg-white border border-slate-200 py-3.5 rounded-2xl font-semibold text-slate-700 hover:bg-slate-50 transition-all shadow-sm active:scale-95"
           >
             <svg width="20" height="20" viewBox="0 0 24 24">

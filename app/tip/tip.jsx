@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Theme } from "@/components/Theme";
 import { FiTrash2, FiUser } from "react-icons/fi";
-import { collection, getDocs, doc, deleteDoc, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc, query } from "firebase/firestore";
 import { db } from '@/config/firebase';
 import { FiLoader } from "react-icons/fi";
 
@@ -18,7 +18,6 @@ const TechTipsFeed = ({ session }) => {
         setLoading(true);
         const ideas = [];
         try {
-            // Added query for better organization
             const q = query(collection(db, "tech-tips"));
             const querySnapshot = await getDocs(q);
             
@@ -96,40 +95,49 @@ const TechTipsFeed = ({ session }) => {
                                     key={tip.postId}
                                     className="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col group w-full"
                                 >
-                                    <div className="p-8 md:p-10 flex flex-col h-full relative">
+                                    {/* The Outer Padding Container remains relative for absolute positioning of the delete button */}
+                                    <div className="p-8 md:p-10 relative">
                                         
-                                        {/* {canDelete && ( */}
-                                            <button
-                                                onClick={() => handleDelete(tip.postId)}
-                                                className="absolute top-8 right-8 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-full transition-all z-20"
-                                            >
-                                                <FiTrash2 size={22} />
-                                            </button>
-                                        {/* )} */}
+                                        {/* Delete Button */}
+                                        <button
+                                            onClick={() => handleDelete(tip.postId)}
+                                            className="absolute top-6 right-6 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-full transition-all z-20"
+                                        >
+                                            <FiTrash2 size={20} />
+                                        </button>
 
-                                        <div className="flex items-center gap-3 mb-5">
-                                            <span
-                                                className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full text-white"
-                                                style={{ backgroundColor: Theme.LightPurple }}
-                                            >
-                                                {tip.cat}
-                                            </span>
-                                            <span className="text-xs text-slate-400 font-medium">{tip.timestamp}</span>
-                                        </div>
+                                        {/* Main Grid Container */}
+                                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                                            
+                                            {/* Content Area (Left: 9 out of 12 columns) */}
+                                            <div className="md:col-span-9 flex flex-col gap-4">
+                                                {/* Category & Timestamp meta bar */}
+                                                <div className="flex items-center gap-3">
+                                                    <span
+                                                        className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full text-white"
+                                                        style={{ backgroundColor: Theme.LightPurple }}
+                                                    >
+                                                        {tip.cat}
+                                                    </span>
+                                                    <span className="text-xs text-slate-400 font-medium">{tip.timestamp}</span>
+                                                </div>
 
-                                        <h2 className="text-2xl md:text-3xl font-bold mb-5 leading-tight text-slate-900 pr-12">
-                                            {tip.techTip}
-                                        </h2>
+                                                {/* Header Title */}
+                                                <h2 className="text-2xl md:text-3xl font-bold leading-tight text-slate-900 pr-6">
+                                                    {tip.techTip}
+                                                </h2>
 
-                                        <div className="mb-8 w-full bg-slate-50/70 border border-slate-100 rounded-2xl p-6 md:p-8">
-                                            <p className="text-slate-700 leading-relaxed text-base md:text-lg whitespace-pre-wrap">
-                                                {tip.desc}
-                                            </p>
-                                        </div>
+                                                {/* Body Description Block */}
+                                                <div className="w-full bg-slate-50/70 border border-slate-100 rounded-2xl p-6">
+                                                    <p className="text-slate-700 leading-relaxed text-base whitespace-pre-wrap">
+                                                        {tip.desc}
+                                                    </p>
+                                                </div>
+                                            </div>
 
-                                        <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center border border-slate-100 bg-slate-100 shadow-sm">
+                                            {/* Author Profile Sidebar (Right: 3 out of 12 columns) */}
+                                            <div className="md:col-span-3 flex md:flex-col items-center md:items-end justify-start gap-3 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-slate-100 md:pl-6 w-full h-full text-right">
+                                                <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border border-slate-100 bg-slate-100 shadow-sm shrink-0">
                                                     {!tip.authorImg || imageErrors[tip.postId] ? (
                                                         <div 
                                                             className="w-full h-full flex items-center justify-center text-white font-bold text-sm"
@@ -146,9 +154,14 @@ const TechTipsFeed = ({ session }) => {
                                                         />
                                                     )}
                                                 </div>
-                                                <p className="text-sm font-bold text-slate-800">{tip.author || "Anonymous"}</p>
+                                                <div className="flex flex-col items-start md:items-end">
+                                                    <span className="text-xs text-slate-400 font-medium hidden md:block">Posted by</span>
+                                                    <p className="text-sm font-bold text-slate-800 break-all">{tip.author || "Anonymous"}</p>
+                                                </div>
                                             </div>
+
                                         </div>
+
                                     </div>
                                 </article>
                             );

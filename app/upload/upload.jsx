@@ -142,7 +142,7 @@ export default function UploadClient() {
   // 3. AUTHENTICATED STATE
   return (
     <div className="flex flex-col items-center w-full py-10 px-4">
-      <div className="w-full max-w-2xl bg-[#FFFDE7] rounded-[2.5rem] shadow-2xl shadow-slate-400/20 border border-slate-200 overflow-hidden">
+      <div className="w-full max-w-2xl bg-[#FFFFFA] rounded-[2.5rem] shadow-2xl shadow-slate-400/20 border border-slate-200 overflow-hidden">
         
         <div className="p-10 pb-2 text-center">
           <h1 className="text-4xl font-black tracking-tight text-gray-700 mb-2">
