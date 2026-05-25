@@ -62,7 +62,7 @@ const TechTipsFeed = ({ session }) => {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50">
                 <FiLoader className="text-4xl animate-spin" style={{ color: Theme.LightPurple }} />
-                <p className="mt-4 font-bold text-slate-400 italic">Fetching tech tips...</p>
+                <p className="mt-4 font-bold text-4xl text-slate-400 italic">Fetching tech tips...</p>
             </div>
         );
     }
@@ -93,7 +93,7 @@ const TechTipsFeed = ({ session }) => {
                             return (
                                 <article
                                     key={tip.postId}
-                                    className="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col group w-full"
+                                    className="bg-[] rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col group w-full"
                                 >
                                     {/* The Outer Padding Container remains relative for absolute positioning of the delete button */}
                                     <div className="p-8 md:p-10 relative">
@@ -156,7 +156,7 @@ const TechTipsFeed = ({ session }) => {
                                                 </div>
                                                 <div className="flex flex-col items-start md:items-end">
                                                     <span className="text-xs text-slate-400 font-medium hidden md:block">Posted by</span>
-                                                    <p className="text-sm font-bold text-slate-800 break-all">{tip.author || "Anonymous"}</p>
+                                                    <p className="text-sm italic hover:text-red-500 font-bold text-slate-800 break-all">{tip.author || "Anonymous"}</p>
                                                 </div>
                                             </div>
 

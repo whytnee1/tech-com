@@ -17,6 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Tech-Com | Let's Meet Developers",
   description: "Where developers meets easy coding",
+  // Added icons configuration for the head title logo
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -27,11 +31,11 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <Provider>
-        <Navbar/>
-        {children}
-        <Footer/>
+          <Navbar/>
+          {children}
+          <Footer/>
         </Provider>
-        </body>
+      </body>
     </html>
   );
 }

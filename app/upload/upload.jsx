@@ -119,7 +119,7 @@ export default function UploadClient() {
   if (status === "unauthenticated") {
     return (
       <div className="flex flex-col items-center justify-center py-20 px-6">
-        <div className="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100 text-center max-w-md">
+        <div className="bg-[#FFD700] p-10 rounded-[2.5rem] shadow-xl border border-slate-100 text-center max-w-md">
           <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-6 text-slate-300">
             <FaLock size={40} />
           </div>
@@ -142,7 +142,7 @@ export default function UploadClient() {
   // 3. AUTHENTICATED STATE
   return (
     <div className="flex flex-col items-center w-full py-10 px-4">
-      <div className="w-full max-w-2xl bg-[#FFFFFA] rounded-[2.5rem] shadow-2xl shadow-slate-400/20 border border-slate-200 overflow-hidden">
+      <div className="w-full max-w-2xl bg-[#FFFDE7] rounded-[2.5rem] shadow-2xl shadow-slate-400/20 border border-slate-200 overflow-hidden">
         
         <div className="p-10 pb-2 text-center">
           <h1 className="text-4xl font-black tracking-tight text-gray-700 mb-2">
