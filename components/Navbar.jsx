@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import Link from "next/link";
 import Image from "next/image";
 import { LuUserRound } from "react-icons/lu";
@@ -8,14 +7,14 @@ import { FaCode } from "react-icons/fa6";
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useSession, signOut } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation"; // Added for active link detection
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 
 export default function Navbar() {
   const { data: session } = useSession();
-  const pathname = usePathname();
+  const pathname = usePathname(); // Get the current path
   const [navOpen, setNavOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -86,7 +85,7 @@ export default function Navbar() {
             <Link
               key={i}
               href={item.url}
-              onClick={() => setNavOpen(false)}
+              onClick={() => setNavOpen(false)} // Close menu on click
               className={`text-lg font-serif py-1 px-2 border-b-3 transition-all duration-300 
                 ${isActive ? "border-[#4B0082] text-[#4B0082] font-bold" : "border-white hover:border-[#4B0082]"}`}
             >
@@ -94,31 +93,10 @@ export default function Navbar() {
             </Link>
           );
         })}
-
-        {/* Shows Profile below Contact Us if user is authenticated, otherwise shows Sign In */}
-        {session ? (
-          <>
-            <Link 
-              href={"/profile"} 
-              className={`text-lg font-serif py-1 px-2 border-b-3 transition-all duration-300 
-                ${pathname === "/profile" ? "border-[#4B0082] text-[#4B0082] font-bold" : "border-white hover:border-[#4B0082]"}`}
-              onClick={() => setNavOpen(false)}
-            >
-              PROFILE
-            </Link>
-            <button 
-              onClick={() => { setNavOpen(false); handleLogout(); }} 
-              className="text-lg font-serif font-bold text-red-500 py-1 px-2 mt-4"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <Link href={"/signin"} className="flex items-center gap-2 text-lg" onClick={() => setNavOpen(false)}>
-            Sign in
-            <LuUserRound className="text-xl" />
-          </Link>
-        )}
+        <Link href={"/signin"} className="flex items-center gap-2 text-lg" onClick={() => setNavOpen(false)}>
+          Sign in
+          <LuUserRound className="text-xl" />
+        </Link>
       </div>
 
       <button
@@ -128,9 +106,8 @@ export default function Navbar() {
         {navOpen ? <IoMdClose /> : <RiMenu3Fill />}
       </button>
 
-      {/* Desktop user profile dropdown */}
       {session ? (
-        <div className="max-md:hidden">
+        <div>
           <button
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
