@@ -26,10 +26,10 @@ export default function Footer() {
       </Link>
 
       <div className="flex items-center gap-8 text-sm max-md:flex-col">
-        <Link href={"#"}>Chat with us</Link>
-        <Link href={"#"}>Privacy Policy</Link>
-        <Link href={"#"}>Terms of Service</Link>
-        <Link href={"#"}>Contact Support</Link>
+        <Link href={"chat"}>Chat with us</Link>
+        <Link href={"privacy"}>Privacy Policy</Link>
+        <Link href={"terms"}>Terms of Service</Link>
+        <Link href={"contact"}>Contact Support</Link>
       </div>
 
       <div>
